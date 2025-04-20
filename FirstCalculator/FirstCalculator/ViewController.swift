@@ -47,24 +47,84 @@ class ViewController: UIViewController {
     
     @IBAction func calculate(_ sender: Any) {
         
-        let a = Int(firstOperandField.text!)!
-        let b = Int(secondOperandField.text!)!
+        // ? : Optional , ! : Optional로 쌓여진 값을 강제추출, 해당값이 nil 이면 에러
         
-        let op = operatorButton.title(for: .normal)!
+        /*
+        
+         * 옵셔널 바인딩
+         
+         if let name : Type = OptionalExpression {
+            statements
+         }
+         
+         while let name : Type = OptionalExpression {
+            statements
+         }
+         
+         guard let name : Type = OptionalExpression else {
+            statements
+         }
+         
+        */
+        
+        /*
+         
+         let str : String? = "123" // Optional
+         print(str!) // unwrapping. 강제추출
+         
+         let str: String? = nil
+         print(str!) // nil을 언래핑 시도할 경우 에러발생
+         
+         // optional binding
+         if let str = str { // it let = str 로 생략 가능
+            // 바인딩 성공
+            if let num = Int(str) {
+                print(num)
+            } else {
+                // 컨버전 실패 (str이 숫자가 아닐 경우 nil)
+            }
+         } else {
+            // 옵셔널 바인딩 실패
+         }
+         
+         */
+        
+        /*
+        //let a = Int(firstOperandField.text!)!
+        if let text = firstOperandField.text, let a = Int(text){
+            
+        }
+        
+        // let b = Int(secondOperandField.text!)!
+        if let text = secondOperandField.text, let b = Int(text){
+            
+        }
+        
+        // let op = operatorButton.title(for: .normal)!
+        if let op = operatorButton.title(for: .normal) {
+            
+        }
+         
+        */
+        
         var result = 0
         
-        if op == "+"{
-            result = a + b
-        } else if op == "-"{
-            result = a - b
-        } else if op == "*"{
-            result = a * b
-        } else if op == "/"{
-            result = a / b
-        } else {
-            print("연산자 선택")
+        if let text = firstOperandField.text, let a = Int(text),
+           let text = secondOperandField.text, let b = Int(text),
+           let op = operatorButton.title(for: .normal) {
+            if op == "+"{
+                result = a + b
+            } else if op == "-"{
+                result = a - b
+            } else if op == "*"{
+                result = a * b
+            } else if op == "/"{
+                result = a / b
+            } else {
+                print("연산자 선택")
+            }
         }
-                
+                            
         resultLable.text = "\(result)" // String Interpolation
     }
     
