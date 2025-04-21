@@ -13,6 +13,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var firstOperandField: UITextField!
     @IBOutlet weak var secondOperandField: UITextField!
     
+    func showAlert(_ message : String) {
+        let alert = UIAlertController(title: "알림", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .default)
+        alert.addAction(okAction)
+        present(alert, animated: true)
+    }
+    
     @IBAction func selectOperator(_ sender: Any) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let plusAction = UIAlertAction(title: "+(더하기)", style: .default) {_ in
@@ -107,8 +114,8 @@ class ViewController: UIViewController {
          
         */
         
-        var result = 0
-        
+        var result : Int? = nil
+        /*
         if let text = firstOperandField.text, let a = Int(text),
            let text = secondOperandField.text, let b = Int(text),
            let op = operatorButton.title(for: .normal) {
@@ -124,7 +131,65 @@ class ViewController: UIViewController {
                 print("연산자 선택")
             }
         }
-                            
+        */
+        
+        
+        // if else -> guard로 코드 정리 (가독성)
+        guard let text = firstOperandField.text, let a = Int(text) else {
+            showAlert("값을 입력해 주세요")
+            return
+        }
+        
+        guard let text = secondOperandField.text, let b = Int(text) else {
+            /*
+            let alert = UIAlertController(title: "알림", message: "값을 입력해주세요", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "확인", style: .default)
+            alert.addAction(okAction)
+            present(alert, animated: true)
+            */
+            showAlert("값을 입력해 주세요")
+            return
+        }
+        
+        guard let op = operatorButton.title(for: .normal), op != "?" else {
+            /*
+            let alert = UIAlertController(title: "알림", message: "연산자를 선택해주세요", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "확인", style: .default)
+            alert.addAction(okAction)
+            present(alert, animated: true)
+             */
+            showAlert("연산자를 선택해주세요")
+            return
+        }
+        
+        switch op {
+        case "+" :
+            result = a + b
+            break;
+        case "-" :
+            result = a - b
+            break;
+        case "*" :
+            result = a * b
+            break;
+        case "/" :
+            result = a / b
+            break;
+        default:
+            print("연산자 선택")
+                /*
+                 let alert = UIAlertController(title: "알림", message: "연산자를 선택해주세요", preferredStyle: .alert)
+                 let okAction = UIAlertAction(title: "확인", style: .default)
+                 alert.addAction(okAction)
+                 present(alert, animated: true)
+                 */
+                showAlert("연산자를 선택해주세요")
+        }
+        
+        guard let result else { // nil로 남아있다면 return. 종료
+            return
+        }
+
         resultLable.text = "\(result)" // String Interpolation
     }
     
