@@ -16,16 +16,26 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var resultLabel: UILabel!
     
+    // 암기하기 좋음
+    func showAlert(message: String){
+        let alert = UIAlertController(title: "알림", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .default)
+        alert.addAction(okAction)
+        present(alert, animated: true)
+    }
+    
     @IBAction func login(_ sender: Any) {
-        let id = idField.text!
-        let password = pwField.text!
-
-        // Early Exit
-        guard !id.isEmpty && !password.isEmpty else {
-            print("계정을 입력하세요")
-            return // guard의 else 문은 반드시 return 이 필요 -> Early return
+        //let id = idField.text!
+        guard let id = idField.text, !id.isEmpty else {
+            showAlert(message: "ID를 입력해 주세요")
+            return
         }
-        
+        // let password = pwField.text!
+        guard let password = pwField.text, !password.isEmpty else {
+            showAlert(message: "PW를 입력해 주세요")
+            return
+        }
+
         if id == "coding" && password == "1234" {
             resultLabel.text = "로그인성공"
         }else {
@@ -37,6 +47,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool){
+        super.viewDidAppear(animated)
+        idField.becomeFirstResponder()
     }
 
 
