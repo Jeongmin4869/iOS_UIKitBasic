@@ -55,22 +55,30 @@ class ViewController: UIViewController {
             }
         }
         
-        let sortedNums = nums.sorted()
+        // ed, -ing -> 새로운 값을 리턴
+        nums.sort()
         
         for(index, label) in labels.enumerated(){
             label.layer.cornerRadius = label.bounds.width / 2
             label.clipsToBounds = true
             
-            label.text = "\(sortedNums[index])"
+            label.text = "\(nums[index])"
             
-            label.backgroundColor = getColors(from: sortedNums[index]).backgroundColor
-            label.textColor = getColors(from: sortedNums[index]).textColor
+            label.backgroundColor = getColors(from: nums[index]).backgroundColor
+            label.textColor = getColors(from: nums[index]).textColor
         }
         
         let colors = getColors(from: nil)
         number7Label.backgroundColor = colors.backgroundColor
         number7Label.textColor = colors.textColor
+        number7Label.layer.cornerRadius = number7Label.bounds.width/2
     }
-
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate { _ in
+            self.number1Label.layer.cornerRadius = self.number1Label.bounds.width/2
+        }
+    }
 }
 
