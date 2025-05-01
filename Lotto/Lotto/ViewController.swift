@@ -17,6 +17,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var number6Label : UILabel!
     @IBOutlet weak var number7Label : UILabel!
     
+    @IBOutlet var labels: [UILabel]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -45,7 +47,7 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let labels = [number1Label!,number2Label!,number3Label!,number4Label!,number5Label!,number6Label!]
+                
         
         var nums = [Int]()
         while nums.count < labels.count {
@@ -58,7 +60,7 @@ class ViewController: UIViewController {
         // ed, -ing -> 새로운 값을 리턴
         nums.sort()
         
-        for(index, label) in labels.enumerated(){
+        for (index, label) in labels.enumerated(){
             label.layer.cornerRadius = label.bounds.width / 2
             label.clipsToBounds = true
             
@@ -76,8 +78,15 @@ class ViewController: UIViewController {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
+        
+        // 클로저 안에 있을 경우 외부 값에 접근하기 위해 self 필요 
         coordinator.animate { _ in
-            self.number1Label.layer.cornerRadius = self.number1Label.bounds.width/2
+            
+            for label in self.labels {
+                label.layer.cornerRadius = label.bounds.width/2
+                label.clipsToBounds = true
+            }
+            
         }
     }
 }
