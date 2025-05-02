@@ -13,8 +13,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var firstOperandField: UITextField!
     @IBOutlet weak var secondOperandField: UITextField!
     
-    func showAlert(_ message : String) {
-        let alert = UIAlertController(title: "알림", message: message, preferredStyle: .alert)
+    func showAlert( _ message : String, _ title : String = "알림") {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "확인", style: .default)
         alert.addAction(okAction)
         present(alert, animated: true)
@@ -22,6 +22,25 @@ class ViewController: UIViewController {
     
     @IBAction func selectOperator(_ sender: Any) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+//        // 생략되지 않은 풀 코드
+//        let action = UIAlertAction(title: "+(더하기)", style: .default, handler: {(action: UIAlertAction) -> Void in
+//            self.operatorButton.setTitle("+", for: .normal)
+//        })
+        
+        var action = UIAlertAction(title: "+(더하기)", style: .default, handler: {(action) in
+                    self.operatorButton.setTitle("+", for: .normal)
+        })
+        
+        action = UIAlertAction(title: "+(더하기)", style: .default, handler: { _ in
+                    self.operatorButton.setTitle("+", for: .normal)
+        })
+        
+        action = UIAlertAction(title: "+(더하기)", style: .default  ) { _ in
+            self.operatorButton.setTitle("+", for: .normal)
+        }
+        
+        // 촤적화된 코드
         let plusAction = UIAlertAction(title: "+(더하기)", style: .default) {_ in
             self.operatorButton.setTitle("+", for: .normal)
         }
