@@ -61,3 +61,26 @@ result3 = cast.contains(where: {(name) in
 result3 = cast.contains({$0.hasPrefix("V")})
 
 result3 = cast.contains {$0.hasPrefix("V")}
+
+
+/* ============================================================== */
+
+func animate(interval: Double, animate: () -> (), completion: (Bool) -> Void ){
+    
+}
+
+animate(interval: 0.3){
+    //code
+} completion: {
+    //code
+}
+
+func animate(interval: Double, animate: () -> (), someValue: Int, completion: (Bool) -> Void ){
+    
+}
+
+animate(interval: 0.3, animate:{
+    
+}, someValue: 1) { Bool in
+    
+}
