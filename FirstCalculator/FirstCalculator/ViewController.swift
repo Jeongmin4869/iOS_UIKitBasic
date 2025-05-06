@@ -28,6 +28,7 @@ class ViewController: UIViewController {
 //            self.operatorButton.setTitle("+", for: .normal)
 //        })
         
+        /*
         var action = UIAlertAction(title: "+(더하기)", style: .default, handler: {(action) in
                     self.operatorButton.setTitle("+", for: .normal)
         })
@@ -39,26 +40,30 @@ class ViewController: UIViewController {
         action = UIAlertAction(title: "+(더하기)", style: .default  ) { _ in
             self.operatorButton.setTitle("+", for: .normal)
         }
+        */
         
         // 촤적화된 코드
         let plusAction = UIAlertAction(title: "+(더하기)", style: .default) {_ in
             self.operatorButton.setTitle("+", for: .normal)
+            self.selectedOperator = .plus
         }
         actionSheet.addAction(plusAction)
         
         let minusAction = UIAlertAction(title: "-(빼기)", style: .default){_ in
             self.operatorButton.setTitle("-", for: .normal)
-            
+            self.selectedOperator = .minus
         }
         actionSheet.addAction(minusAction)
         
         let multiplyAction = UIAlertAction(title: "*(곱하기)", style: .default) { _ in
             self.operatorButton.setTitle("*", for: .normal)
+            self.selectedOperator = .mutiply
         }
         actionSheet.addAction(multiplyAction)
         
         let devideAction = UIAlertAction(title: "/(나누기)", style: .default) { _ in
             self.operatorButton.setTitle("/", for: .normal)
+            self.selectedOperator = .divide
         }
         actionSheet.addAction(devideAction)
         
@@ -70,6 +75,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var operatorButton: UIButton!
     
     @IBOutlet weak var resultLable: UILabel!
+    
+    var selectedOperator : Operator? // 선택하지 않은 경우를 고려하여 옵셔널
     
     @IBAction func calculate(_ sender: Any) {
         
@@ -155,54 +162,31 @@ class ViewController: UIViewController {
         
         // if else -> guard로 코드 정리 (가독성)
         guard let text = firstOperandField.text, let a = Int(text) else {
+            firstOperandField.becomeFirstResponder() // 포커싱
             showAlert("값을 입력해 주세요")
             return
         }
         
         guard let text = secondOperandField.text, let b = Int(text) else {
-            /*
-            let alert = UIAlertController(title: "알림", message: "값을 입력해주세요", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "확인", style: .default)
-            alert.addAction(okAction)
-            present(alert, animated: true)
-            */
             showAlert("값을 입력해 주세요")
             return
         }
         
-        guard let op = operatorButton.title(for: .normal), op != "?" else {
-            /*
-            let alert = UIAlertController(title: "알림", message: "연산자를 선택해주세요", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "확인", style: .default)
-            alert.addAction(okAction)
-            present(alert, animated: true)
-             */
+        guard let op = selectedOperator else {
+
             showAlert("연산자를 선택해주세요")
             return
         }
         
         switch op {
-        case "+" :
-            result = a + b
-            break;
-        case "-" :
-            result = a - b
-            break;
-        case "*" :
-            result = a * b
-            break;
-        case "/" :
-            result = a / b
-            break;
-        default:
-            print("연산자 선택")
-                /*
-                 let alert = UIAlertController(title: "알림", message: "연산자를 선택해주세요", preferredStyle: .alert)
-                 let okAction = UIAlertAction(title: "확인", style: .default)
-                 alert.addAction(okAction)
-                 present(alert, animated: true)
-                 */
-                showAlert("연산자를 선택해주세요")
+            case .plus :
+                result = a + b
+            case .minus :
+                result = a - b
+            case .mutiply :
+                result = a * b
+            case .divide :
+                result = a / b
         }
         
         guard let result else { // nil로 남아있다면 return. 종료
@@ -210,7 +194,19 @@ class ViewController: UIViewController {
         }
 
         resultLable.text = "\(result)" // String Interpolation
+        
+        // firstOperandField.resignFirstResponder() // 포커싱해제
+        if firstOperandField.isFirstResponder{
+            firstOperandField.resignFirstResponder()
+        }
+        
+        if secondOperandField.isFirstResponder{
+            secondOperandField.resignFirstResponder()
+        }
     }
+    
+    // First Responder : 최초 응답 객체
+    
     
     
     
@@ -219,6 +215,10 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        firstOperandField.becomeFirstResponder() // 포커싱
+    }
 
 }
 
