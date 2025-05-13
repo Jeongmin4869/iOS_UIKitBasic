@@ -29,15 +29,20 @@ struct Course {
         return URL(string: str)
     }
     
+    //let formatter = NumberFormatter()
+    let reviewScoreformatter = {
+        let formatter NumberFormatter()
+        formatter.minimumFractionDigits = 0 // 소숫점 부분이 없을때는 정수로 표시되도록
+        formatter.maximumFractionDigits = 1
+        return formatter
+    } ()
+    
+    
     // * 점수 표시
     let reviewScore: Double?
     var reviewScoreStr: String? {
         guard let score = reviewScore else  { return nil  }
-        
-        let formatter = NumberFormatter()
-        formatter.minimumFractionDigits = 0 // 소숫점 부분이 없을때는 정수로 표시되도록
-        formatter.maximumFractionDigits = 1
-        return formatter.string(for: score)
+        return reviewScoreformatter.string(for: score)
     }
     
     let isCertificationAvaliable: Bool // 수료증
@@ -52,11 +57,16 @@ struct Course {
     
     // * 시간 표시
     let totalDuration: Int
-    var totalDurationStr: String? {
+    
+    let durationFormatter = {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.hour, .minute] // 열거형처럼 보이지만 타임속성
         formatter.unitsStyle = .full // 열거형
-        return formatter.string(from: TimeInterval(totalDuration))
+        return formatter
+    }
+    
+    var totalDurationStr: String? {
+        return durationFormatter.string(from: TimeInterval(totalDuration))
     }
     
     let priority: Int // 강좌의 우선순위
@@ -71,19 +81,29 @@ struct Course {
     
     let price: Double? // 무료 강의가 있을 수 있으므로 옵셔널
     let discountedPrice: Double? // nil이면 할인중이 아님
-    var priceString: String?{ // UILabel 의 String 매개변수는 옵셔널값이므로 해당 값도 옵셔널이어도 문제 없음
-        guard let price else { return "무료"}
-        
+    
+    let priceFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency // 지역에 맞게 포멧팅
         formatter.locale = Locale(identifier: "ko-KR") // 지역을 설정 (ios locale list)
+        return formatter
+    }()
+    
+    var priceString: String?{ // UILabel 의 String 매개변수는 옵셔널값이므로 해당 값도 옵셔널이어도 문제 없음
+        guard let price else { return "무료"}
         
         if let discountedPrice {
-            return formatter.string(for: discountedPrice)
+            return priceFormatter.string(for: discountedPrice)
         }
         
-        return formatter.string(for: price)
+        return priceFormatter.string(for: price)
         
+    }
+    
+    init() {
+        // 생성자에서 값을 초기화
+        formatter.minimumFractionDigits = 0 // 소숫점 부분이 없을때는 정수로 표시되도록
+        formatter.maximumFractionDigits = 1
     }
     
 }
@@ -144,11 +164,25 @@ struct  Camp {
     let latitude: Double?
     let longtitude: Double?
     
-    let status: CampStatus // 열거형 사용
+    // 다른 타입 안에 또다른 다입 -> Nested Type
+    // 강의 상태
+    // Camp.CampStatus -> 중복제거 Camp.Status
+    enum Status : String {
+        case preparingForOpening = "개강준비중"
+        case recruiting          = "모집중"
+        case recruitingEnded     = "모집마감"
+        case onGoing             = "개강"
+        case ended               = "종강"
+    }
+    
+    let status: Status // 열거형 사용. Camp.CampStatus
     let generation: Int // 가수 표현
     
     // 계산속성
-    var statusString: String {
+    var statusString: String? {
+        return "\(generation)기 \(Status.rawValue)"
+        
+        /*
         switch status {
         case .preparingForOpening:
             return "\(generation)기 개강 중비중"
@@ -161,6 +195,7 @@ struct  Camp {
         case .ended:
             return "\(generation)기 종강"
         }
+        */
     }
     
     let price: Double?
@@ -182,11 +217,59 @@ struct  Camp {
     
 }
 
-// 강의 상태
-enum CampStatus {
-    case preparingForOpening // 개강준비중
-    case recruiting // 모집중
-    case recruitingEnded // 모집마감
-    case onGoing // 개강
-    case ended // 종강
+/*
+ // camp 구조체 안으로 포함시킴
+ enum CampStatus {
+     case preparingForOpening // 개강준비중
+     case recruiting // 모집중
+     case recruitingEnded // 모집마감
+     case onGoing // 개강
+     case ended // 종강
+ }
+ */
+
+/*========================================================================================*/
+
+// raw value 원시값
+
+/*
+ enum TypeName: RawValueType{
+     case caseName = Value
+ }
+ */
+
+enum Aligment: Int{ // 원시값의 타입이 정수형
+    case left // 0
+    case right = 100 // 100
+    case center // 101
+}
+
+// 0부터 시작하며, 이전 케이스부터 1씩 커지는 값을 가지게 된다.
+// 원시값은 수정이 불가능하다.
+Alignment.left.rawValue   // 0
+Alignment.right.rawValue  // 100
+Alignment.center.rawValue // 101
+
+Alignment(rawValue: 0)    // .left
+Alignment(rawValue: 200)  // nil
+
+
+enum Weekday: String{
+    case sunday
+    case monday = "MON"
+    case tuesday
+    case wednseday
+    case thursday = "THU"
+    case friday
+    case saturday
+}
+
+Weekday.wednesday.rawValue // wednesday
+Weekday.thursday.rawValue  // THU
+
+
+/*========================================================================================*/
+
+static Person {
+    let name: String = { "Swift".lowercased()}() // 클로저를 통해 여러줄의 코드로 초기화 가능
 }
