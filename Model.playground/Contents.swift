@@ -4,33 +4,8 @@ import UIKit
 // 모델링 추상화 => 필요한 정보를 선택하는 것
 // 사람 - 이름, 생일, 성별, 사는곳, ...
 
-class Service {
-    // 인스턴스 속성 Instance Property (인스턴스마다 속성값이 다름)
-    let title: String // 항상 필요한 값이므로 non optional, Stored Property 상수 저장 속성
-    let subtitle: String
+extension Double {
     
-    // * 이미지 표시
-    let cardImageUrlStr: String
-    // let cardImageUrl: URL
-    // 계산속성. Computed Property
-    var cardImageUrl: URL? {
-         URL(string: cardImageUrlStr)
-        // 읽기 전용 계산 속성 read-only computed property
-        // return 생략
-    }
-    
-    let thumbnailImageUrlStr: String?
-    var thumbnailImageUrl: URL?{
-        guard let str = thumbnailImageUrlStr else {
-            return nil
-        }
-        return URL(string: str)
-    }
-
-    // static -> Type Property 타입속성 형식속성
-    // 타입속성 : 타입마다 1개만 만들어지는 속성. 초기화 불가능
-    // 인스턴스속성 : 인스턴스를 생성할때마다 만들어지는 속성. 초기화 가능
-    // 생성자는 인스턴스를 생성할 때마다 호출되므로, 타입속성은 생성자에서 초기화 불가능
     static let reviewScoreformatter = {
         let formatter = NumberFormatter()
         formatter.minimumFractionDigits = 0 // 소숫점 부분이 없을때는 정수로 표시되도록
@@ -38,6 +13,71 @@ class Service {
         return formatter
     } ()
     
+    var reviewScoreString: String? {
+        return Self.reviewScoreformatter.string(for: self)
+    }
+    
+    static let priceFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency // 지역에 맞게 포멧팅
+        formatter.locale = Locale(identifier: "ko-KR") // 지역을 설정 (ios locale list)
+        return formatter
+    }()
+    
+    var priceString: String? {
+        return Self.priceFormatter.string(for: self)
+    }
+    
+}
+
+5.0.reviewScoreString
+
+extension String{
+    var url: URL?{
+        return URL(string: self)
+    }
+}
+
+class Service {
+    // 인스턴스 속성 Instance Property (인스턴스마다 속성값이 다름)
+    let title: String // 항상 필요한 값이므로 non optional, Stored Property 상수 저장 속성
+    let subtitle: String
+    
+    // * 이미지 표시
+    let cardImageUrl: String
+    // let cardImageUrl: URL
+    // 계산속성. Computed Property
+    /*
+    var cardImageUrl: URL? {
+         URL(string: cardImageUrlStr)
+        // 읽기 전용 계산 속성 read-only computed property
+        // return 생략
+    }
+     -> extension
+     */
+    
+    let thumbnailImageUrl: String?
+    /*
+    var thumbnailImageUrl: URL?{
+        guard let str = thumbnailImageUrlStr else {
+            return nil
+        }
+        return URL(string: str)
+    }
+    */
+    // static -> Type Property 타입속성 형식속성
+    // 타입속성 : 타입마다 1개만 만들어지는 속성. 초기화 불가능
+    // 인스턴스속성 : 인스턴스를 생성할때마다 만들어지는 속성. 초기화 가능
+    // 생성자는 인스턴스를 생성할 때마다 호출되므로, 타입속성은 생성자에서 초기화 불가능
+    /*
+    static let reviewScoreformatter = {
+        let formatter = NumberFormatter()
+        formatter.minimumFractionDigits = 0 // 소숫점 부분이 없을때는 정수로 표시되도록
+        formatter.maximumFractionDigits = 1
+        return formatter
+    } ()
+     -> extension으로 빼냄
+    */
     
     // 인스턴스 밖에서 인스턴스 멤버에 접근 -> 인스턴스의 이름을 사용
     // 인스턴스 안에서 인스턴스 멤버에 접근 -> self 사용 (생략가능)
@@ -45,10 +85,13 @@ class Service {
     
     // * 점수 표시
     let reviewScore: Double?
+    /*
     var reviewScoreStr: String? {
         guard let score = reviewScore else  { return nil  }
         return Self.reviewScoreformatter.string(for: score)
     }
+     -> extension으로 빼냄
+     */
     
     let isCertificationAvaliable: Bool // 수료증
     
@@ -58,10 +101,29 @@ class Service {
          isCertificationAvaliable: Bool) {
         self.title = title
         self.subtitle = subtitle
-        self.cardImageUrlStr = cardImageUrlStr
-        self.thumbnailImageUrlStr = thumbnailImageUrlStr
+        self.cardImageUrl = cardImageUrlStr
+        self.thumbnailImageUrl = thumbnailImageUrlStr
         self.reviewScore = reviewScore
         self.isCertificationAvaliable = isCertificationAvaliable
+    }
+}
+
+let s = Service(title: "Master", subtitle: "", cardImageUrlStr: "", thumbnailImageUrlStr: "", reviewScore: 5.0, isCertificationAvaliable: true)
+s.reviewScore?.reviewScoreString
+s.cardImageUrl.url
+
+
+extension Int {
+    
+    static let durationFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute] // 열거형처럼 보이지만 타임속성
+        formatter.unitsStyle = .full // 열거형
+        return formatter
+    }()
+    
+    var durationString: String? {
+        return Self.durationFormatter.string(from: TimeInterval(self))
     }
 }
 
@@ -79,6 +141,7 @@ class Course: Service {
     // * 시간 표시
     let totalDuration: Int
     
+    /*
     static let durationFormatter = {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.hour, .minute] // 열거형처럼 보이지만 타임속성
@@ -89,6 +152,8 @@ class Course: Service {
     var totalDurationStr: String? {
         return Self.durationFormatter.string(from: TimeInterval(totalDuration))
     }
+     -> extension
+     */
     
     let priority: Int // 강좌의 우선순위
     
@@ -103,21 +168,26 @@ class Course: Service {
     let price: Double? // 무료 강의가 있을 수 있으므로 옵셔널
     let discountedPrice: Double? // nil이면 할인중이 아님
     
+    /*
     static let priceFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency // 지역에 맞게 포멧팅
         formatter.locale = Locale(identifier: "ko-KR") // 지역을 설정 (ios locale list)
         return formatter
     }()
+    -> extension
+     */
     
     var priceString: String?{ // UILabel 의 String 매개변수는 옵셔널값이므로 해당 값도 옵셔널이어도 문제 없음
         guard let price else { return "무료"}
         
         if let discountedPrice {
-            return Self.priceFormatter.string(for: discountedPrice)
+            // return Self.priceFormatter.string(for: discountedPrice)
+            return discountedPrice.priceString
         }
         
-        return Self.priceFormatter.string(for: price)
+        //return Self.priceFormatter.string(for: price)
+        return price.priceString
     }
     
     init(title: String, subtitle: String, cardImageUrlStr: String, thumbnailImageUrlStr: String?, reviewScore: Double?, isCertificationAvaliable: Bool, courseId: Int, lectureCount: Int,
@@ -135,6 +205,18 @@ class Course: Service {
 
 }
 
+extension Date {
+    // extension은 저장속성을 추가할 수 없음
+    // 타입속성, 계산속성
+    static let formatter = DateFormatter()
+    // 메소드
+    func format(with format: String, locale: Lacale= Locale(identifier: "ko_kr")) -> String? {
+        Self.formatter.dateFormat = format
+        Self.formatter.locale = locale
+        return Self.formatter.string(from: self)
+    }
+}
+
 class Camp: Service {
     
     let campId: Int
@@ -142,6 +224,7 @@ class Camp: Service {
     /*===============================================================================*/
     
     let startDate: Date
+    /*
     var startDateString: String?{
         let formatter = DateFormatter()
         // 사용자가 포메터 셋팅
@@ -152,18 +235,11 @@ class Camp: Service {
         
         return formatter.string(from: startDate)
         
-    }
+    }s
+     */
     
     let endDate: Date
-    var endDateString: String?{
-        let formatter = DateFormatter()
-        formatter.dateFormat = "M월 d일 개강"
-        formatter.locale = Locale(identifier: "ko_kr")
-        return formatter.string(from: endDate)
-    }
-    
     let isOnlineCamp: Bool
-
     let locationURL: URL?
     let latitude: Double?
     let longtitude: Double?
@@ -216,10 +292,12 @@ class Camp: Service {
         formatter.locale = Locale(identifier: "ko-KR") // 지역을 설정 (ios locale list)
         
         if let discountedPrice {
-            return formatter.string(for: discountedPrice)
+            //return formatter.string(for: discountedPrice)
+            return discountedPrice.priceString
         }
         
-        return formatter.string(for: price)
+        //return formatter.string(for: price)
+        return price.priceString
         
     }
     
@@ -367,3 +445,19 @@ e.age
 let p = Person(name: "박박박", age: 32)
 p.name
 p.age
+
+/*========================================================================================*/
+
+/* Extention 확장. 이미 존재하고 있는 기능을 확장*/
+
+/*
+ entension Type(기능을 추가하고 싶은 이름 & 존재하는 이름) {
+    computedPropery
+    computedTypeProperty
+    instanceMethod
+    typeMethod
+    initializer
+    subscript
+    NestedType
+ }
+ */
