@@ -210,7 +210,7 @@ extension Date {
     // 타입속성, 계산속성
     static let formatter = DateFormatter()
     // 메소드
-    func format(with format: String, locale: Lacale= Locale(identifier: "ko_kr")) -> String? {
+    func format(with format: String, locale: Local = Locale(identifier: "ko_kr")) -> String? {
         Self.formatter.dateFormat = format
         Self.formatter.locale = locale
         return Self.formatter.string(from: self)
@@ -235,7 +235,7 @@ class Camp: Service {
         
         return formatter.string(from: startDate)
         
-    }s
+    }`s
      */
     
     let endDate: Date
@@ -280,7 +280,6 @@ class Camp: Service {
     
     let priority : Int
     let isPublic : Bool
-    let period: Int?
     
     let price: Double?
     let discountedPrice: Double?
@@ -301,7 +300,27 @@ class Camp: Service {
         
     }
     
-    init(title: String, subtitle: String, cardImageUrlStr: String, thumbnailImageUrlStr: String?, reviewScore: Double?, isCertificationAvaliable: Bool, campId: Int, startDate: Date, endDate: Date, isOnlineCamp: Bool, locationUrl: URL?, latitude: Double?, longitude: Double?, status: Status, generation: Int, priority: Int, isPublic: Bool, period: Int?, price: Double?, discountedPrice: Double?) {
+    //  designated initializer
+    init(title: String,
+         subtitle: String,
+         cardImageUrlStr: String,
+         thumbnailImageUrlStr: String? = nil,
+         reviewScore: Double? = nil,
+         isCertificationAvaliable: Bool = true,
+         campId: Int,
+         startDate: Date,
+         endDate: Date,
+         isOnlineCamp: Bool = true,
+         locationUrl: URL? = nil,
+         latitude: Double? = nil,
+         longitude: Double? = nil,
+         status: Status = Status.preparingForOpening,
+         generation: Int,
+         priority: Int,
+         isPublic: Bool,
+         price: Double?,
+         discountedPrice: Double? = nil) {
+        
         self.campId = campId
         self.startDate = startDate
         self.endDate = endDate
@@ -313,13 +332,43 @@ class Camp: Service {
         self.generation = generation
         self.priority = priority
         self.isPublic = isPublic
-        self.period = period
         self.price = price
         self.discountedPrice = discountedPrice
+        
+        // Delegate up
         super.init(title: title, subtitle: subtitle, cardImageUrlStr: cardImageUrlStr, thumbnailImageUrlStr: thumbnailImageUrlStr, reviewScore: reviewScore, isCertificationAvaliable: isCertificationAvaliable)
     }
     
 }
+
+extension Camp {
+    // 하루만 진행하는 무료 온라인 캠프 생성자
+    // 생성자 종류
+    // 1. designated initializer : 지정생성자 (현재클래스의 모든 저장속성 초기화, 슈퍼클래스 생성자 호출)
+    // 2. convenience iniitializer : 간편생성자, 편의생성자. 초기화를 원하는 저장속성만 초기화. 반드시 같은 클래스의 지정생성차를 호출해주어야한다.
+    // extension은 지정생성자를 호출할 수 없으며 convenience 생성자를 호출해야한다
+    convenience init(title: String,
+         subtitle: String,
+         cardImageUrlStr: String,
+         thumbnailImageUrlStr: String? = nil,
+         reviewScore: Double? = nil,
+         isCertificationAvaliable: Bool = true,
+         campId: Int,
+         startDate: Date,
+         locationUrl: URL,
+         status: Status = Status.preparingForOpening,
+         priority: Int,
+         isPublic: Bool) {
+        
+        self.init(title: title, subtitle: subtitle, cardImageUrlStr: cardImageUrlStr, thumbnailImageUrlStr: thumbnailImageUrlStr, reviewScore: reviewScore,isCertificationAvaliable: isCertificationAvaliable, campId: campId, startDate: startDate, endDate: endDate, locationUrl: locationUrl, status: status, generation: 0, priority: priority, isPublic: isPublic, price: nil)
+    }
+}
+
+// Camp(title: <#T##String#>, subtitle: <#T##String#>, cardImageUrlStr: <#T##String#>, thumbnailImageUrlStr: <#T##String?#>, reviewScore: <#T##Double?#>, isCertificationAvaliable: <#T##Bool#>, campId: <#T##Int#>, startDate: <#T##Date#>, endDate: <#T##Date#>, isOnlineCamp: <#T##Bool#>, locationUrl: <#T##URL?#>, latitude: <#T##Double?#>, longitude: <#T##Double?#>, status: <#T##Camp.Status#>, generation: <#T##Int#>, priority: <#T##Int#>, isPublic: <#T##Bool#>, period: <#T##Int?#>, price: <#T##Double?#>, discountedPrice: <#T##Double?#>)
+
+// Camp(title: <#T##String#>, subtitle: <#T##String#>, cardImageUrlStr: <#T##String#>, campId: <#T##Int#>, startDate: <#T##Date#>, endDate: <#T##Date#>, generation: <#T##Int#>, priority: <#T##Int#>, isPublic: <#T##Bool#>, price: <#T##Double?#>)
+
+// Camp(title: <#T##String#>, subtitle: <#T##String#>, cardImageUrlStr: <#T##String#>, campId: <#T##Int#>, startDate: <#T##Date#>, locationUrl: <#T##URL#>, priority: <#T##Int#>, isPublic: <#T##Bool#>)
 
 /*
  // camp 구조체 안으로 포함시킴
