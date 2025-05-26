@@ -13,6 +13,7 @@ enum Weather: String {
     case rain = "비"
     case snow = "눈"
     
+    // 계산식
     var image: UIImage? {
         switch self {
             case .clear :

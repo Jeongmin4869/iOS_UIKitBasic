@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A177EFCA2DE496F600B1A121 /* Int+Lotto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A177EFC92DE496F600B1A121 /* Int+Lotto.swift */; };
+		A177EFCC2DE498CE00B1A121 /* UILabel+Lotto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A177EFCB2DE498CE00B1A121 /* UILabel+Lotto.swift */; };
 		A1CCDA862DC1042600F67BD1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CCDA852DC1042600F67BD1 /* AppDelegate.swift */; };
 		A1CCDA882DC1042600F67BD1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CCDA872DC1042600F67BD1 /* SceneDelegate.swift */; };
 		A1CCDA8A2DC1042600F67BD1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CCDA892DC1042600F67BD1 /* ViewController.swift */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A177EFC92DE496F600B1A121 /* Int+Lotto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Lotto.swift"; sourceTree = "<group>"; };
+		A177EFCB2DE498CE00B1A121 /* UILabel+Lotto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Lotto.swift"; sourceTree = "<group>"; };
 		A1CCDA822DC1042600F67BD1 /* Lotto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lotto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1CCDA852DC1042600F67BD1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1CCDA872DC1042600F67BD1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +41,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A177EFC82DE496C000B1A121 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A177EFC92DE496F600B1A121 /* Int+Lotto.swift */,
+				A177EFCB2DE498CE00B1A121 /* UILabel+Lotto.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		A1CCDA792DC1042600F67BD1 = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +69,7 @@
 		A1CCDA842DC1042600F67BD1 /* Lotto */ = {
 			isa = PBXGroup;
 			children = (
+				A177EFC82DE496C000B1A121 /* Extensions */,
 				A1CCDA852DC1042600F67BD1 /* AppDelegate.swift */,
 				A1CCDA872DC1042600F67BD1 /* SceneDelegate.swift */,
 				A1CCDA892DC1042600F67BD1 /* ViewController.swift */,
@@ -138,8 +152,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A177EFCC2DE498CE00B1A121 /* UILabel+Lotto.swift in Sources */,
 				A1CCDA8A2DC1042600F67BD1 /* ViewController.swift in Sources */,
 				A1CCDA862DC1042600F67BD1 /* AppDelegate.swift in Sources */,
+				A177EFCA2DE496F600B1A121 /* Int+Lotto.swift in Sources */,
 				A1CCDA882DC1042600F67BD1 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

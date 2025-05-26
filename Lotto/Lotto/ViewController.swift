@@ -24,6 +24,7 @@ class ViewController: UIViewController {
 
     }
     
+    /*
     func getColors(from number: Int?) -> (backgroundColor: UIColor, textColor: UIColor){
         guard let number else {
             return (UIColor.purple, UIColor.white)
@@ -44,36 +45,21 @@ class ViewController: UIViewController {
                 return (UIColor.purple, UIColor.white)
         }
     }
+    */
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-                
         
-        var nums = [Int]()
-        while nums.count < labels.count {
-            let rnd = Int.random(in: 1 ... 45)
-            if !nums.contains(rnd) {
-                nums.append(rnd)
-            }
-        }
-        
-        // ed, -ing -> 새로운 값을 리턴
-        nums.sort()
+        let nums = Int.uniqueRandomNumbers(in:  1 ... 45, count: 7)
         
         for (index, label) in labels.enumerated(){
-            label.layer.cornerRadius = label.bounds.width / 2
-            label.clipsToBounds = true
-            
-            label.text = "\(nums[index])"
-            
-            label.backgroundColor = getColors(from: nums[index]).backgroundColor
-            label.textColor = getColors(from: nums[index]).textColor
+            if label == labels.last {
+                label.setLottoNumber(nums[index], with: .purple, textColor: .white)
+            }
+            else {
+                label.setLottoNumber(nums[index])
+            }
         }
-        
-        let colors = getColors(from: nil)
-        number7Label.backgroundColor = colors.backgroundColor
-        number7Label.textColor = colors.textColor
-        number7Label.layer.cornerRadius = number7Label.bounds.width/2
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
