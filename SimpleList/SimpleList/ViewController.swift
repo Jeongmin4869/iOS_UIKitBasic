@@ -18,6 +18,7 @@ import UIKit
 class ViewController: UIViewController{// , UITableViewDataSource {
     
     let fruits:[String] = ["apple", "mango", "banana", "watermelon"]
+    let languages = ["swift", "C#", "Java", "C++"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,10 +34,24 @@ class ViewController: UIViewController{// , UITableViewDataSource {
 // Delegate코드는 extension으로 분리하는 것이 좋다.
 extension ViewController: UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        print("#3", #function)
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("#1", #function) // 첫 호출되어 표시할 cell의 갯수를 리턴. 2번 호출됨 (이유는 모름)
-        return 100
-        // return fruits.count
+        print("#1", #function, section) // 첫 호출되어 표시할 cell의 갯수를 리턴. 2번 호출됨 (이유는 모름)
+        //return 100
+        
+        switch section{
+            case 0:
+                return fruits.count
+            case 1:
+                return languages.count
+            default:
+                return 0
+        }
+
     }
     
     // cellForRowAt : 셀마다 반복적으로 호출되기 때문에 가벼운 코드만 사용
@@ -56,10 +71,28 @@ extension ViewController: UITableViewDataSource {
             cell.textLabel?.text = "\(indexPath.section) - \(indexPath.row)"
         }
         
-        cell.textLabel?.text = "\(indexPath.section) - \(indexPath.row) : \(fruits[indexPath.row%fruits.count])"
+        switch indexPath.section {
+        case 0:
+            cell.textLabel?.text = "\(indexPath.section) - \(indexPath.row) : \(fruits[indexPath.row%fruits.count])"
+        case 1:
+            cell.textLabel?.text = "\(indexPath.section) - \(indexPath.row) : \(languages[indexPath.row%languages.count])"
+        default:
+            break;
+        }
+        
         
         // #3. 생성된 cell 리턴
         return cell
         
+    }
+}
+
+
+// Delegate
+// DataSource에서 받은 데이터로 이벤트 실행
+extension ViewController: UITableViewDelegate{
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(fruits[indexPath.row])
     }
 }
