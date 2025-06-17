@@ -34,6 +34,31 @@ class ViewController: UIViewController{// , UITableViewDataSource {
 // Delegate코드는 extension으로 분리하는 것이 좋다.
 extension ViewController: UITableViewDataSource {
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        var sectionText:String
+        
+        switch section {
+            case 0:
+                sectionText = "좋아하는 과일"
+            case 1:
+                sectionText = "사용할 수 있는 언어"
+            default:
+                return nil
+        }
+        return sectionText
+    }
+    
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        
+        switch section {
+            case 1:
+                return "\(languages.count)개의 언어를 사용할 수 있습니다. "
+            default:
+                return nil
+        }
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         print("#3", #function)
         return 2
@@ -72,14 +97,13 @@ extension ViewController: UITableViewDataSource {
         }
         
         switch indexPath.section {
-        case 0:
-            cell.textLabel?.text = "\(indexPath.section) - \(indexPath.row) : \(fruits[indexPath.row%fruits.count])"
-        case 1:
-            cell.textLabel?.text = "\(indexPath.section) - \(indexPath.row) : \(languages[indexPath.row%languages.count])"
-        default:
-            break;
+            case 0:
+                cell.textLabel?.text = "\(indexPath.section) - \(indexPath.row) : \(fruits[indexPath.row%fruits.count])"
+            case 1:
+                cell.textLabel?.text = "\(indexPath.section) - \(indexPath.row) : \(languages[indexPath.row%languages.count])"
+            default:
+                break;
         }
-        
         
         // #3. 생성된 cell 리턴
         return cell
@@ -93,6 +117,14 @@ extension ViewController: UITableViewDataSource {
 extension ViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(fruits[indexPath.row])
+        
+        switch indexPath.section{
+            case 0:
+                print(fruits[indexPath.row])
+            case 1:
+                print(languages[indexPath.row])
+            default:
+                break                
+        }
     }
 }
