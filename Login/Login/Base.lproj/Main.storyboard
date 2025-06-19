@@ -32,7 +32,7 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="wA8-9k-xbz"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fmq-QL-Xgu">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fmq-QL-Xgu">
                                 <rect key="frame" x="16" y="269" width="361" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Login"/>
@@ -65,6 +65,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="LoginButton" destination="Fmq-QL-Xgu" id="gRD-Qp-V5Z"/>
                         <outlet property="idField" destination="trN-Xv-Zlx" id="CEj-SE-KX9"/>
                         <outlet property="pwField" destination="kEI-bN-4OI" id="f3s-e1-OXv"/>
                         <outlet property="resultLabel" destination="v8F-gu-b7N" id="uzQ-jt-a1Y"/>
