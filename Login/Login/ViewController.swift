@@ -63,19 +63,37 @@ extension ViewController: UITextFieldDelegate {
     // true를 리턴할 경우 3번째 파라미터인 string으로 반영이 됨(최종 텍스트)
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
+        
+        var finalId = idField.text ?? ""
+        var finalPassword = pwField.text ?? ""
+        
+        
+        if textField == idField {
+            guard let range = Range(range, in:finalId) else {
+                return true
+            }
+            finalId = finalId.replacingCharacters(in: range, with: string)
+        }else if textField == pwField {
+            guard let range = Range(range, in:finalPassword) else {
+                return true
+            }
+            finalPassword = finalPassword.replacingCharacters(in: range, with: string)
+        }
+        
         // print(#function, textField.text, string) // 텍스트가 한글자씩 늦게 호출되는것을 확일 할 수 있음
         
         // 최종 텍스트를 얻는 방법
         // NSRange -> Range 타입으로 변경
+        /*
         guard let text = textField.text, let range = Range(range, in:text) else {
             return true
         }
-        let finalText = text.replacingCharacters(in: range, with: string)
-        print(finalText) // -> 최종 텍스트를 출력
+         print(finalText) -> 최종 텍스트를 출력
+         */
+
         
-        let pwText =
-        
-        LoginButton.isEnabled = !finalText.isEmpty 
+        // 버튼 활성화
+        LoginButton.isEnabled = !finalId.isEmpty && !finalPassword.isEmpty
         
         return true // false일 경우 글자 변경이 반영되지 않음
     }
