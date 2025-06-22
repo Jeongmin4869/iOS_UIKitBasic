@@ -212,7 +212,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        // Delegate 연동
+        firstOperandField.delegate = self // viewController 를 Delegate로 지정 
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -221,4 +222,25 @@ class ViewController: UIViewController {
     }
 
 }
+
+extension ViewController: UITextFieldDelegate {
+    
+    // 텍스트 필드에 입력되는 내용이 바뀔 때 마다 반복적으로 호출
+    // true : 변경된 값 반영
+    // false : 변경된 값 버리고 반영하지 않음
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        // 3번째 파라미터 String (마지막 입력값. 삭제일 경우 빈값)
+        // 삭제일 경우 이벤트 없으므로 true 리턴
+        guard !string.isEmpty else { return true }
+        
+        // text를 숫자로 바꿀 수 없는 경우 (문자열이 입력된 경우) -> false리턴
+        // false를 리턴하게 하여 변경사항 반영하지 않음
+        guard let _ = Int(string) else {return false}
+        
+        
+        return true
+    }
+}
+
 

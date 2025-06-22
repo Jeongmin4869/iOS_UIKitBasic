@@ -72,6 +72,11 @@ extension ViewController: UITextFieldDelegate {
             guard let range = Range(range, in:finalId) else {
                 return true
             }
+            // textField.text(바로직전문자),string(변경된문자) 으로는 최종 텍스트를 가져올 수 없음
+            // 최종 텍스트를 가져오기 위해 replacingCharacters를 사용
+            // replacingCharacters의 range 타입과 매개변수의 range타입이 다름
+            // guard문을 사용하여 range 타입 변환
+            // range에는 최종 상태의 텍스트 길이(범위)저장
             finalId = finalId.replacingCharacters(in: range, with: string)
         }else if textField == pwField {
             guard let range = Range(range, in:finalPassword) else {
