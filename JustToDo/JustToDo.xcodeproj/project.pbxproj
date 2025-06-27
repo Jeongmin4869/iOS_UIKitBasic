@@ -9,21 +9,23 @@
 /* Begin PBXBuildFile section */
 		A1570B2C2E0D7B8800A33D15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1570B2B2E0D7B8800A33D15 /* AppDelegate.swift */; };
 		A1570B2E2E0D7B8800A33D15 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1570B2D2E0D7B8800A33D15 /* SceneDelegate.swift */; };
-		A1570B302E0D7B8800A33D15 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1570B2F2E0D7B8800A33D15 /* ViewController.swift */; };
+		A1570B302E0D7B8800A33D15 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1570B2F2E0D7B8800A33D15 /* ListViewController.swift */; };
 		A1570B332E0D7B8800A33D15 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1570B312E0D7B8800A33D15 /* Main.storyboard */; };
 		A1570B352E0D7B8900A33D15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1570B342E0D7B8900A33D15 /* Assets.xcassets */; };
 		A1570B382E0D7B8900A33D15 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1570B362E0D7B8900A33D15 /* LaunchScreen.storyboard */; };
+		A1A709AD2E0EBFE500912390 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A709AC2E0EBFE500912390 /* AddViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A1570B282E0D7B8800A33D15 /* JustToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JustToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1570B2B2E0D7B8800A33D15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1570B2D2E0D7B8800A33D15 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A1570B2F2E0D7B8800A33D15 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A1570B2F2E0D7B8800A33D15 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		A1570B322E0D7B8800A33D15 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A1570B342E0D7B8900A33D15 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1570B372E0D7B8900A33D15 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A1570B392E0D7B8900A33D15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A1A709AC2E0EBFE500912390 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +60,8 @@
 			children = (
 				A1570B2B2E0D7B8800A33D15 /* AppDelegate.swift */,
 				A1570B2D2E0D7B8800A33D15 /* SceneDelegate.swift */,
-				A1570B2F2E0D7B8800A33D15 /* ViewController.swift */,
+				A1570B2F2E0D7B8800A33D15 /* ListViewController.swift */,
+				A1A709AC2E0EBFE500912390 /* AddViewController.swift */,
 				A1570B312E0D7B8800A33D15 /* Main.storyboard */,
 				A1570B342E0D7B8900A33D15 /* Assets.xcassets */,
 				A1570B362E0D7B8900A33D15 /* LaunchScreen.storyboard */,
@@ -138,8 +141,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1570B302E0D7B8800A33D15 /* ViewController.swift in Sources */,
+				A1570B302E0D7B8800A33D15 /* ListViewController.swift in Sources */,
 				A1570B2C2E0D7B8800A33D15 /* AppDelegate.swift in Sources */,
+				A1A709AD2E0EBFE500912390 /* AddViewController.swift in Sources */,
 				A1570B2E2E0D7B8800A33D15 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
