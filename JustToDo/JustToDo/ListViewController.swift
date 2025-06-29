@@ -13,12 +13,12 @@ class ListViewController: UIViewController {
     
     @IBOutlet weak var toDoTabelView: UITableView!
     
-    // 세그웨이가 실행되기 직전 호출되는 메소드
+    // prepare : 세그웨이가 실행되기 직전 호출되는 메소드
     // segue : 세그웨이
     // sender : 세그웨이를 호출하는 것. 여기서는 + 버튼
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        // 새로 표시될 화면에 접근하여 첫번째 화면을 속성에 저장
+        // 새로 표시될 화면에 접근하여 첫번째 화면을 속성(AddViewController 의 listVC) 에 저장
         // segue.source : 첫번째 페이지
         // segue.destination : 목적지 페이지
         

@@ -17,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A14DC8602E114A92001B3324 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A1570B282E0D7B8800A33D15 /* JustToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JustToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1570B2B2E0D7B8800A33D15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1570B2D2E0D7B8800A33D15 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +63,7 @@
 				A1570B2D2E0D7B8800A33D15 /* SceneDelegate.swift */,
 				A1570B2F2E0D7B8800A33D15 /* ListViewController.swift */,
 				A1A709AC2E0EBFE500912390 /* AddViewController.swift */,
+				A14DC8602E114A92001B3324 /* MyPlayground.playground */,
 				A1570B312E0D7B8800A33D15 /* Main.storyboard */,
 				A1570B342E0D7B8900A33D15 /* Assets.xcassets */,
 				A1570B362E0D7B8900A33D15 /* LaunchScreen.storyboard */,

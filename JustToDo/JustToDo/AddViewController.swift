@@ -27,9 +27,12 @@ class AddViewController: UIViewController {
         }
         
         // 2. 텍스트 저장
+        // optional Chaining 
         listVC?.toDoList.append(text)
+        // toDoTabelView -> 선언만 되어있고 연결되어있지 않다면 오류 발생
+        // outlet 이 iuo로 선언되어있는 이유 
         listVC?.toDoTabelView.reloadData()
-        
+    
         // 3. 화면 없애기
         dismiss(animated: true)
     }
