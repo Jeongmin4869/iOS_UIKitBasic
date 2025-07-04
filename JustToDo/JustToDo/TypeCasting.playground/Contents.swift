@@ -12,7 +12,7 @@ b = 456
 b = 456.78 // 에러발생하지 않음
 b = "Hello"
 // b.count // 에러발생. Any Type 에는 count라는 값이 없다.
-           // Any타입은 앖을 저장할 뿐, 그 타입이 가지고 있는 메소드는 호출할 수 없다.
+           // Any타입은 값을 저장할 뿐, 그 타입이 가지고 있는 메소드는 호출할 수 없다.
 
 /* -------- 타입 캐스팅 -------- */
 // is : 타입을 확인하는 연산자. Type check operator
@@ -44,7 +44,7 @@ let strFromNSstr2: String = b as! String // ! : 강제추출
                                          // b에 Int값을 저장해도 코딩 단계에서는 오류가 나지 않음
                                          // 타입이 맞지 않으면 crush 발생
 // Conditional Casts
-let strFromNSstr3: String? = b as? String // String(옵셔널이 아닐 경우) 컴파일 에러 발생
+let strFromNSstr3: String? = b as? String // : String(옵셔널이 아닐 경우) 컴파일 에러 발생
                                           // 캐스팅에 실패하면 nil을 리턴
 
 // 컨디셔널 캐스팅이 성공했을 때 해당 값을 언래핑하여 b에 바인딩

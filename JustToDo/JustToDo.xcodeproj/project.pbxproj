@@ -17,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A11C23302E1802FA00995868 /* UpCastingDownCasting.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = UpCastingDownCasting.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A13B08442E12BC4A00A560D9 /* TypeCasting.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = TypeCasting.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A14DC8602E114A92001B3324 /* OptionalChaining.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = OptionalChaining.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A1570B282E0D7B8800A33D15 /* JustToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JustToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,6 +63,7 @@
 			children = (
 				A1570B2B2E0D7B8800A33D15 /* AppDelegate.swift */,
 				A1570B2D2E0D7B8800A33D15 /* SceneDelegate.swift */,
+				A11C23302E1802FA00995868 /* UpCastingDownCasting.playground */,
 				A1570B2F2E0D7B8800A33D15 /* ListViewController.swift */,
 				A1A709AC2E0EBFE500912390 /* AddViewController.swift */,
 				A14DC8602E114A92001B3324 /* OptionalChaining.playground */,
