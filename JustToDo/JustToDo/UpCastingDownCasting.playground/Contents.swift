@@ -71,6 +71,6 @@ if let c = objList.last as? C {
 // a는 실제로 A클라스의 객체
 // A를 갑자기 C로 캐스팅 할 수 없음.
 // 다운캐스팅 실패 -> if문이 실행되지 않음
-if let c = objList.last as? C {
-    c.three
+if let a = objList.last as? C {
+    a.three
 }

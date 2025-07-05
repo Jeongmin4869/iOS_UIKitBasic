@@ -9,7 +9,8 @@ import UIKit
 
 class AddViewController: UIViewController {
     
-    var listVC: ListViewController?
+    // 커플링, 결합도 -> 강하게 의존하고 있어 좋지 않음
+    var listVC: ListViewController? // 커플링
 
     @IBOutlet weak var inputField: UITextField!
     
