@@ -16,7 +16,10 @@ class AddViewController: UIViewController {
     /*  Delegate 속성을 추가.             */
     /*---------------------------------*/
     
-    weak var delegate: ListViewController
+    // weak : 클래스와 연관된 키워드
+    // 일반 프로토콜을 사용할 경우 에러가 남
+    // 클래스 프로토콜을 사용해 주어야 한다. 
+    weak var delegate: TodoDelegate?
     
     @IBOutlet weak var inputField: UITextField!
     override func viewDidLoad() {
@@ -26,6 +29,11 @@ class AddViewController: UIViewController {
     }
 
     @IBAction func cancel(_ sender: Any) {
+        // delegate?.addViewControllerDidCancel(self)
+        // addViewControllerDidCancel는 선택적 메소드
+        // addViewControllerDidCancel는 구현될수도 있고 안될수도 있음 -> Optional
+        // Optional chaining
+        delegate?.addViewControllerDidCancel?(self)
         dismiss(animated: true)
     }
     
@@ -37,6 +45,7 @@ class AddViewController: UIViewController {
         guard let text = inputField.text else {
             return
         }
+        delegate?.addViewController(self, didInsert: text)
         dismiss(animated: true)
     }
 }

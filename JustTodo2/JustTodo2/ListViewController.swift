@@ -13,10 +13,33 @@ class ListViewController: UIViewController {
     
     @IBOutlet weak var toDoTableView: UITableView!
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination.children.first as? AddViewController{
+            // ListViewController가 AddViewController의 Delegate
+            vc.delegate = self
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+}
+
+extension ListViewController: TodoDelegate{
+    func addViewController(_ vc: UIViewController, didInsert todo: String) {
+        toDoList.append(todo)
+        toDoTableView.reloadData()
+    }
+    
+    /*
+     // 선택적 메소드로 구현되어 반드시 구현하지 않아도 됨
+     // @objc optional 
+    func addViewControllerDidCancel(_ vc: UIViewController) {
+    }
+     */
+    
+    
 }
 
 extension ListViewController : UITableViewDataSource{
@@ -29,6 +52,4 @@ extension ListViewController : UITableViewDataSource{
         cell.textLabel?.text = toDoList[indexPath.row]
         return cell
     }
-    
-    
 }
