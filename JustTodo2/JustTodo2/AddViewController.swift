@@ -18,8 +18,9 @@ class AddViewController: UIViewController {
     
     // weak : 클래스와 연관된 키워드
     // 일반 프로토콜을 사용할 경우 에러가 남
-    // 클래스 프로토콜을 사용해 주어야 한다. 
-    weak var delegate: TodoDelegate?
+    // 클래스 프로토콜을 사용해 주어야 한다.
+    /* Delegate패턴 주석처리 */
+//    weak var delegate: TodoDelegate?
     
     @IBOutlet weak var inputField: UITextField!
     override func viewDidLoad() {
@@ -33,7 +34,7 @@ class AddViewController: UIViewController {
         // addViewControllerDidCancel는 선택적 메소드
         // addViewControllerDidCancel는 구현될수도 있고 안될수도 있음 -> Optional
         // Optional chaining
-        delegate?.addViewControllerDidCancel?(self)
+//        delegate?.addViewControllerDidCancel?(self)
         dismiss(animated: true)
     }
     
@@ -45,7 +46,16 @@ class AddViewController: UIViewController {
         guard let text = inputField.text else {
             return
         }
-        delegate?.addViewController(self, didInsert: text)
+//        delegate?.addViewController(self, didInsert: text)
+        
+        /* Notification */
+        // NotificationCenter : 수신국 역할
+        // NotificationCenter를 통해 Notification 을 보낸다.
+        let center = NotificationCenter.default
+        // // post로 메세지 송신
+        // NSNotification.Name : 메세지가 언제 전달되는지 설명할 수 있는 커멘트
+        center.post(name: NSNotification.Name("toDoDidInsert"), object: nil, userInfo: ["todo": text])
+        
         dismiss(animated: true)
     }
 }
