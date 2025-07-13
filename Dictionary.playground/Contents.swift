@@ -75,9 +75,9 @@ arr3?[0]
 // 문법적으로 허용은 되나 주로 Key는 Non Optional로 사용함
 var dict2: [String? : String] = ["Apple": "사과", "Banana":"바나나"]
 
-// [Key? : Value]
+// [Key : Value?]
 // Value가 Optional로 사용함
-var dict3: [String? : String] = ["Apple": "사과", "Banana":"바나나"]
+var dict3: [String : String?] = ["Apple": "사과", "Banana":"바나나"]
 
 // Apple 키에 nil을 저장?
 // Apple 키에 해당하는 요소를 제거? -> 이대로 실행된다
