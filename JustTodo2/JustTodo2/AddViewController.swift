@@ -7,6 +7,10 @@
 
 import UIKit
 
+enum Key{
+    case todo
+}
+
 class AddViewController: UIViewController {
 
     // segue를 사용한 데이터 이동
@@ -54,7 +58,8 @@ class AddViewController: UIViewController {
         let center = NotificationCenter.default
         // // post로 메세지 송신
         // NSNotification.Name : 메세지가 언제 전달되는지 설명할 수 있는 커멘트
-        center.post(name: NSNotification.Name("toDoDidInsert"), object: nil, userInfo: ["todo": text])
+        // NSNotification.Name.toDoDidInsert -> .toDoDidInsert : 타입추론 활용
+        center.post(name: NSNotification.Name.toDoDidInsert, object: nil, userInfo: [Key.todo: text])
         
         dismiss(animated: true)
     }

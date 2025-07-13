@@ -7,6 +7,10 @@
 
 import UIKit
 
+extension Notification.Name {
+    static let toDoDidInsert = Notification.Name("toDoDidInsert")
+}
+
 class ListViewController: UIViewController {
 
     var toDoList = [String]()
@@ -28,11 +32,13 @@ class ListViewController: UIViewController {
         /*---------------------------------*/
         // Notification : 송신국
         // Observer : 주파수를 맞추는 작업
-        NotificationCenter.default.addObserver(forName: NSNotification.Name("toDoDidInsert"), object: nil, queue: .main) { noti in
+        // forName: NSNotification.Name("toDoDidInsert") : 감시하고싶은 Notification의 이름
+        // object : Notification을 포스팅한 객체. 특정 객체가 보낸것만 처리하고싶을 때 사용. 보통은 nil 
+        NotificationCenter.default.addObserver(forName: .toDoDidInsert, object: nil, queue: .main) { noti in
             // noti : Notification 타입의 파라미터
             // 이 클로저는 3번째 파라미터인 queue 에서 실행
             // queue.main : main 스레드
-            if let todo = noti.userInfo?["todo"] as? String{
+            if let todo = noti.userInfo?[Key.todo] as? String{
                 self.toDoList.append(todo);
                 self.toDoTableView.reloadData()
             }
