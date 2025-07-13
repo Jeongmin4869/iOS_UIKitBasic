@@ -22,7 +22,10 @@ class ListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        /*방법 3. Notification Observer*/
+        /*---------------------------------*/
+        /*  방법 3.                         */
+        /*  Notification Observer.         */
+        /*---------------------------------*/
         // Notification : 송신국
         // Observer : 주파수를 맞추는 작업
         NotificationCenter.default.addObserver(forName: NSNotification.Name("toDoDidInsert"), object: nil, queue: .main) { noti in
