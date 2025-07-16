@@ -11,15 +11,44 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // 추가된 코드. 초기화 코드
-//    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-//        return true
-//    }
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        print(self, #function)
         return true
     }
 
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        print(self, #function)
+        return true
+    }
+
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        print(self, #function)
+    }
+    
+    func applicationWillResignActive(_ application: UIApplication) {
+        // active -> inactive
+        print(self, #function)
+    }
+    
+    func applicationDidEnterBackground(_ application: UIApplication){
+        // Background : UI가 표시되지 않는 상태
+        print(self, #function)
+    }
+    
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        // Foreground : UI가 표시된 상태
+        print(self, #function)
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        // 앱이 완전히 종료되어 Not Running 이 되기 직전
+        print(self, #function)
+    }
+    
+    // willFinishLaunchingWithOptions -> didFinishLaunchingWithOptions
+    
+    
+    
     // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {

@@ -37,5 +37,36 @@ import UIKit
  @main
  -> Delegate 클래스
  
+ */
+ 
+ /*------------------------------------*/
+ /*      Application Life Cycle 2      */
+ /*------------------------------------*/
+ 
+ /*
+  
+  Not Running <-> Inactive <-> Active
+     ↑ ↓       /       ↑ ↓
+   Suspended  <->  Background
+  
+  
+  Not Running : 실행중인 상태가 아님
+  
+  Inactive : 사용자가 앱을 실행하며 초기화 과정 (바로 위 과정)을 진행한 상태
+  
+  Active : 초기화 완료 된 후 첫번째 화면이 표시. 앱화면이 표시되어있고 터치 이벤트를 받을 수 있는 상태
+           홈화면으로 이동할 경우 -> Inactive -> Background
+  
+  Background : 작업은 실행중이나, 화면이 표시되지 않아 터치 이벤트는 받을 수 없는 상태
+               Background에서 실행할 작업이 없다면 -> Suspended
+  
+  Suspended : 아무런 작업도 수행하지 않고 최소한의 리소스만 실행하며 일시중지된 상태
+              완전히 종료된 것이 아니며, 다시 원래 상태로 돌아갈 수 있다 -> Inactive
+  
+  Not Running : 앱을 완전히 종료한 상태. 최소한의 리소스도 모두 반납
+  
+  상태가 변경될 때마다 Delegate 메소드가 호출 
+  
+  
  
  */
