@@ -45,6 +45,8 @@ import UIKit
  
  /*
   
+  App-based life cycle (iOS 13 이전 방식) -> AppDelegate가 모든 life cycle 처리 (scene 사용 X)
+  
   Not Running <-> Inactive <-> Active
      ↑ ↓       /       ↑ ↓
    Suspended  <->  Background

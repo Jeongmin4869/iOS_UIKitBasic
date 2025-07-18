@@ -45,7 +45,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(self, #function)
     }
     
-    // willFinishLaunchingWithOptions -> didFinishLaunchingWithOptions
+    // 앱 실행 시
+    // 1. willFinishLaunchingWithOptions -> 2. didFinishLaunchingWithOptions 호출
+    // UI가 화면에 표시되었으나 applicationDidBecomeActive 까지는 호출되지 않음.
+    // Scene을 사용한다면 applicationDidBecomeActive는 호출되지 않음. sceneDidBecomeActive을 대신 호출 (레퍼런스 확인)
+    // Scene을 사용하는것과 관계 없이 DidBecomeActiveNotification를 포스팅
+    // 나머지도 Scene을 사용하고 있기 때문에 호출되지 않음
+    // 앱 종료 시
+    // 3. applicationWillTerminate 호출 
     
     
     
