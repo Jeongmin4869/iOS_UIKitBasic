@@ -57,17 +57,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     // MARK: UISceneSession Lifecycle
-
+    
+    // configurationForConnecting : 새로운 Scene을 만들때마다 호출
+    // 커스터마이징 된 씬을 리턴할 수 있음
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.
         // Use this method to select a configuration to create the new scene with.
+        print(self, #function)
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
 
+    // didDiscardSceneSessions : Scene을 받은다음 호출되는 메소드
+    //
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+        print(self, #function)
     }
 
 
