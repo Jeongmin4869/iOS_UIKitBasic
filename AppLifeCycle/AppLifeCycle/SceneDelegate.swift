@@ -12,6 +12,98 @@ import UIKit
  이를 Scene에 표시하려면 Window 객체가 필요하다.
  */
 
+/*
+ 
+ 앱 실행 로그
+ 
+ <AppLifeCycle.AppDelegate: 0x600003d74240> application(_:willFinishLaunchingWithOptions:)
+ <AppLifeCycle.AppDelegate: 0x600003d74240> application(_:didFinishLaunchingWithOptions:)
+ <AppLifeCycle.AppDelegate: 0x600003d74240> application(_:configurationForConnecting:options:)
+ <AppLifeCycle.SceneDelegate: 0x600003f6cc40> scene(_:willConnectTo:options:)
+ <AppLifeCycle.SceneDelegate: 0x600003f6cc40> sceneWillEnterForeground(_:)
+ <AppLifeCycle.SceneDelegate: 0x600003f6cc40> sceneDidBecomeActive(_:)
+ 
+ 앱실행
+ -> Main 호출 -> 이 안에서 UIApplication Main 호출 -> UI Application 인스턴스 AppDelegate 인스턴스 생성
+ -> 초기화 실행 (willFinishLaunchingWithOptions,didFinishLaunchingWithOptions)
+ -> 화면을 표시하기위해 Scene 생성 (configurationForConnecting / 스토리보드의 이름, 델리게이트 이름 ) -> Scene Delegate도 함께 만들어 둘을 연결
+    configurationForConnecting은 매번 호출되는것은 아님. 이미 앱이 실행된적이 있다면 재사용하기 떄문에 이를 호출하지 않음
+ -> Window객체 생성 (willConnectTo / 초기화 작업 구현)
+ -> UI표시 (sceneWillEnterForeground)
+ -> 터치이벤트 처리까지 준비 완료 (sceneDidBecomeActive)
+ 
+ 홈이동
+ <AppLifeCycle.SceneDelegate: 0x600003f6cc40> sceneWillResignActive(_:)
+ <AppLifeCycle.SceneDelegate: 0x600003f6cc40> sceneDidEnterBackground(_:)
+
+ 다시 실행
+ <AppLifeCycle.SceneDelegate: 0x600003f6cc40> sceneWillEnterForeground(_:)
+ <AppLifeCycle.SceneDelegate: 0x600003f6cc40> sceneDidBecomeActive(_:)
+ 
+ 앱종료
+ <AppLifeCycle.SceneDelegate: 0x600003f6cc40> sceneWillResignActive(_:)
+ <AppLifeCycle.SceneDelegate: 0x600003f6cc40> sceneDidDisconnect(_:)
+ <AppLifeCycle.AppDelegate: 0x600003d74240> application(_:didDiscardSceneSessions:)
+ <AppLifeCycle.AppDelegate: 0x600003d74240> applicationWillTerminate(_:)
+ 
+ 
+ sceneDidDisconnect -> 씬과의 연결 끊김
+ didDiscardSceneSessions -> 씬이 제거
+ applicationWillTerminate -> 앱 종료
+ 
+ */
+
+
+/*
+ 
+ 여러개의 씬 (아이패드실행. 멀티태스킹 스플릿뷰 사용)
+ 
+ 스플릿뷰 안됨 -> 다중윈도우 지원되지 않음
+ xcode가 자동으로 만들어주는 프로젝트는 씬은 기본적으로 지원하나, 1개의 씬만 지원하는 싱글 윈도우
+ info -> Enable Multiple Windows 를 YES
+ 
+ 앱실행
+ <AppLifeCycle.AppDelegate: 0x6000026081f0> application(_:willFinishLaunchingWithOptions:)
+ <AppLifeCycle.AppDelegate: 0x6000026081f0> application(_:didFinishLaunchingWithOptions:)
+ <AppLifeCycle.AppDelegate: 0x6000026081f0> application(_:configurationForConnecting:options:)
+ <AppLifeCycle.SceneDelegate: 0x600002424d60> scene(_:willConnectTo:options:)
+ <AppLifeCycle.SceneDelegate: 0x600002424d60> sceneWillEnterForeground(_:)
+ <AppLifeCycle.SceneDelegate: 0x600002424d60> sceneDidBecomeActive(_:)
+ -> 0x6000026081f0 : 인스턴스가 저장되어있는 메모리 주소. 같은 인스턴스라면 같은 주소 사용
+ 
+ 스플릿 뷰를 사용하여 새로운 씬 추가
+ <AppLifeCycle.SceneDelegate: 0x600002424d60> sceneWillResignActive(_:)
+ <AppLifeCycle.SceneDelegate: 0x600002424d60> sceneDidBecomeActive(_:)
+ <AppLifeCycle.SceneDelegate: 0x600002424d60> sceneWillResignActive(_:)
+ <AppLifeCycle.AppDelegate: 0x6000026081f0> application(_:configurationForConnecting:options:)
+ <AppLifeCycle.SceneDelegate: 0x6000024782c0> scene(_:willConnectTo:options:)
+ <AppLifeCycle.SceneDelegate: 0x6000024782c0> sceneWillEnterForeground(_:)
+ <AppLifeCycle.SceneDelegate: 0x600002424d60> sceneDidBecomeActive(_:)
+ <AppLifeCycle.SceneDelegate: 0x6000024782c0> sceneDidBecomeActive(_:)
+ 
+ configurationForConnecting가 두번 호출되었으나, 인스턴스 주소가 모두 같다 (0x6000026081f0)
+ -> 새로운 씬을 추가한다고 해서 새로운 앱이 실행되는것은 아니다. 앱은 하나만 실행되고 앱델리게이트도 하나만 생성된 상태
+ -> 이것을 모든 씬이 공유
+ -> configurationForConnecting은 새로운 씬을 리턴
+ -> 씬이 연결되기 직전 willConnectTo 호출. 메모리 주소가 이전과 상이 0x600002424d60 <> 0x6000024782c0
+ -> 새로운 씬을 만들며 새로운 씬 델리게이트도 함께 만듬
+ 
+ 
+ 앱 종료 (왼 0x60000088ed00 / 오 0x60000089b1e0)
+ <AppLifeCycle.SceneDelegate: 0x60000089b1e0> sceneWillResignActive(_:)
+ <AppLifeCycle.SceneDelegate: 0x60000088ed00> sceneWillResignActive(_:)
+ <AppLifeCycle.SceneDelegate: 0x60000088ed00> sceneDidBecomeActive(_:)
+ <AppLifeCycle.SceneDelegate: 0x60000089b1e0> sceneDidEnterBackground(_:)
+ 2025-07-20 18:34:55.137598+0900 AppLifeCycle[36196:6945202] [Common] Snapshot request 0x6000006c2790 complete with error: <NSError: 0x6000006342a0; domain: BSActionErrorDomain; code: 6 (anulled)>
+ <AppLifeCycle.SceneDelegate: 0x60000089b1e0> sceneDidDisconnect(_:)
+ <AppLifeCycle.AppDelegate: 0x600000aa01e0> application(_:didDiscardSceneSessions:)
+ 
+ 오른쪽 앱 종료 시 왼쪽 앱은 Inactive 상태였다가 다시 Active로 돌아온다
+ -> sceneWillResignActive -> sceneDidBecomeActive
+ 
+ */
+
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
