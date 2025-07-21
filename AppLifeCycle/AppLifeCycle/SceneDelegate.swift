@@ -104,9 +104,17 @@ import UIKit
  */
 
 
+/*
+ 
+ SceneDelegate는 Scene이 생성되는 시점에 생성되며 Scene마다 하나씩 개별적으로 생성
+ 
+ */
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    
+    var sharedData = 0
 
     // willConnectTo : Scene이 호출되고 나서 앱과 연결되기 직전 호출. 초기화 작업 구현하는곳
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -142,6 +150,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     // sceneWillEnterForeground : Foreground상태가 되기 직전, UI가 표시되기 직전 호출
+    // 네트워크에 다시 연결하는 코드 등을 구현 
     func sceneWillEnterForeground(_ scene: UIScene) {
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
@@ -149,6 +158,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     // sceneDidEnterBackground : Background 상태가 된 이후 호출
+    // 리소스를 반납하는 코드 구현
     func sceneDidEnterBackground(_ scene: UIScene) {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information

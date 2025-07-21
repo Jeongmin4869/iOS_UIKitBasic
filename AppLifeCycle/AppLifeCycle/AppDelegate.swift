@@ -7,8 +7,21 @@
 
 import UIKit
 
+
+/*
+ 
+ Delegate 패턴 : 첫번째 객체는 Delegate를 호출하는 객체
+ 
+ */
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    // Application 공유객체를 Application.shared 을 사용하여 접근
+    // 이곳에서 필요한 데이터를 저장하고 앱 전체에서 공유할 수 있다.
+    var sharedData = 0
+    
+    
 
     // 추가된 코드. 초기화 코드
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
@@ -16,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+    // 무언가를 초기화 할 때 사용하는 델리게이트
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         print(self, #function)
         return true
