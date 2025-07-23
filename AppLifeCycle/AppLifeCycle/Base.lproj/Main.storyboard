@@ -23,11 +23,21 @@
                                     <constraint firstAttribute="height" constant="200" id="ls4-ou-iKf"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PSw-RY-ozh">
+                                <rect key="frame" x="159" y="783" width="75" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                <connections>
+                                    <action selector="openBrowser:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9Z4-Cx-UFP"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="cIy-Iv-nvr" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="TN1-FD-6TQ"/>
+                            <constraint firstItem="PSw-RY-ozh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="VRg-34-ya2"/>
+                            <constraint firstItem="PSw-RY-ozh" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Zc3-2F-OD6"/>
                             <constraint firstItem="cIy-Iv-nvr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="qLe-Sb-1xg"/>
                         </constraints>
                     </view>
