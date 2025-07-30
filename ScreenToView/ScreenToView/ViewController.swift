@@ -74,7 +74,7 @@ class ViewController: UIViewController {
      - UIWindow 클래스로 구현되어있다
      - 스토리보드를 사용하지 않는다면 직접 구현해야 한다.
      - 화면에 표시되는 내용을 완전히 새로운 내용으로 교체해야할 때 사용한다.
-       ex. window.reootViewController = destination
+       ex. window.rootViewController = destination
      */
     
     /*---------------------------------*/
@@ -85,7 +85,35 @@ class ViewController: UIViewController {
      - 이러한 뷰를 rootViewController라고 한다.
      - window.rootViewController
      - 앱을 구성하는 나머지 컨트롤러는 rootViewController 밑에 차례대로 추가된다.
+     
+     ViewController는 UIKit으로 앱을 만들 때 가장 중요하고 필수적인 요소
+     아래 3가지 요소를 담당한다.
+     
+     1. 뷰 관리
+     
+         - 모든 뷰 컨트롤러는 하나의 루트 뷰를 가지고 있다.
+         - 뷰 컨트롤러가 관리하는 뷰들은 루트뷰 아래쪽으로 추가된다
+         
+         ** View (root view )**
+         - UIView 로 구현된 객체 / vc.view
+         - Root View에는 view 속성으로 접근할 수 있다.
+         - 스토리보드에서 추가하는 뷰는 Root View 아래쪽에 추가된다.
+     
+     2. 이벤트 처리
+     
+     @IBAction func test(_ sender: Any) {
+     }
+     
+     주로 ViewController 에서 Delegate, Action 등등의 이벤트 처리
+     
+     
+     3. 화면 전환
+     
+     - 메뉴가 나온다거나 새로운 뷰로 이동 -> View Controller가 기본적으로 제공하는 기능 
+     
      */
     
+    @IBAction func test(_ sender: Any) {
+    }
 }
 
