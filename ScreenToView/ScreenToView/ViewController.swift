@@ -149,7 +149,7 @@ class ViewController: UIViewController {
                        Disappeared       (viewDidDisappear)
                        Deinitialization  (deinit)
      
-     
+      
      
      
      */
