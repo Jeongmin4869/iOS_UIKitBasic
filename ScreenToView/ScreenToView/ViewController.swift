@@ -113,6 +113,52 @@ class ViewController: UIViewController {
      
      */
     
+    /*---------------------------------------------*/
+    /*         View Controller  - Content VC       */
+    /*---------------------------------------------*/
+    /*
+     
+     View Controller는 UIViewController 클래스로 구현되어있다
+     화면을 구현할 때는 새로운 클래스를 만들고 UIViewController를 상속한 다음 원하는 기능을 추가하는 방식으로 구현한다.
+     
+     
+     1. Content VC
+     - 테이블뷰, 버튼, 이미지 뷰 등을 추가하여 화면을 구성하는 뷰 컨트롤러
+     - 대부분은 이에 속한다.
+     = 하나의 뷰를 구현하는 뷰 컨트롤러
+     
+     2. Container VC
+     - 하나 이상의 뷰 컨트롤러를 child로 관리
+     - child view Controller 사이의 전환을 처리해준다.
+     - 탭바컨트롤러, 스플릿뷰컨트롤러
+    
+     */
+    
+    /*-----------------------------------------*/
+    /*      View Controller  - Life Cycle      */
+    /*-----------------------------------------*/
+    
+    /*
+     
+     rootView 기준
+     
+     Initialization -> Load              (viewDidLoad)
+     (init)            Appearing         (viewWillAppear / viewIsAppearing)
+                       Appeared          (viewDidAppear)
+                       Disappearing      (viewWillDisappear)
+                       Disappeared       (viewDidDisappear)
+                       Deinitialization  (deinit)
+     
+     
+     
+     
+     */
+    
+    // 콜백방식 : 별도의 Delegate를 사용하지 않고. 자기자신의 메소드를 호출하는 방식
+    
+    
+    
+    
     @IBAction func test(_ sender: Any) {
     }
 }
