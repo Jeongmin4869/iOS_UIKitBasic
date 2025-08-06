@@ -147,14 +147,18 @@ class ViewController: UIViewController {
                        Appeared          (viewDidAppear)
                        Disappearing      (viewWillDisappear)
                        Disappeared       (viewDidDisappear)
-                       Deinitialization  (deinit)
+                       Deinitialization  (deinit) -- 소멸자, 메모리 제거
      
       
      
      
      */
     
-    // 콜백방식 : 별도의 Delegate를 사용하지 않고. 자기자신의 메소드를 호출하는 방식
+    // * 애플리케이션, 씬은 Delegate를 상속하여 사용하는 Delegate 방식
+    
+    // * 뷰 컨트롤러에서에서 라이프 사이클 이벤트를 처리하는 방식
+    // -> 콜백방식 : 별도의 Delegate를 사용하지 않고. 자기자신의 메소드를 호출하는 방식
+    // - 뷰 컨트롤러는 라이프 사이클 이벤트가 발생하면 UIViewController안에 있는 메소드를 호출한다. 
     
     
     
