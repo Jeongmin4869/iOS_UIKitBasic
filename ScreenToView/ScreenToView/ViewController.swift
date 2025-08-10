@@ -8,9 +8,19 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    
+    /*-----------------------------------------------------*/
+    /*              View Controller Life Cycle             */
+    /*-----------------------------------------------------*/
+    // viewDidLoad : 루틉뷰가 메모리에 저장된 다음 호출. 뷰 컨트롤러 라이프사이클 동안 한번만 호출됨
+    // 초기화 코드 작성
+    // 일반적인 클래스 - 생성자에서 초기화
+    // 뷰 컨트롤러 - 루트뷰가 생성된 후 초기화 작업 필요. 루트뷰는 생성자가 만들어진 다음 생성. viewDidLoad() 에서 초기화
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print(self, #function)
         
         /*---------------------------------*/
         /*              Screen             */
@@ -22,7 +32,7 @@ class ViewController: UIViewController {
          - 앱을 만들때는 거의 사용하지 않는다
          - 이미지를 스크린 크기에 맟주거나 뷰의 스냅샷을 찍을때 사용한다
          - UIScreen로 구현되어있다.
-                
+         
          */
         
         /*
@@ -37,19 +47,47 @@ class ViewController: UIViewController {
         print(view.window?.windowScene?.screen.bounds) // nil 리턴
     }
     
+    // viewWillAppear : 루트뷰가 계층에 추가되기 직전에 호출
+    // 화면이 표시되기 전 테이블뷰 데이터를 리로드하고싶다면 여기서
+    override func viewWillAppear(_ animated: Bool) {
+        print(self, #function)
+    }
+    
+    // viewIsAppearing : : 루트뷰가 계층에 추가된 직후에 호출
+    // 보통 뷰의 배치를 변경하는 것을 구현
+    // xcode 15 이상에서 확인 가능
+    // 현재 내가 사용하고있는건 xcode 14
+    // override func viewIsAppearing(_ animated: Bool) {
+    //    print(self, #function)
+    //}
+    
+    // viewDidAppear : 루트뷰가 계층에 추가되고 화면이 표시된 다음 호출
+    // 키보드를 표시하는 기능 구현. 어디에서 해도 똑같이 동작함
     override func viewDidAppear(_ animated: Bool) {
-        // 스크린의 크기를 얻는 방법
-        // 포인트 단위의 숫자가 출력된다.
-        print(UIScreen.main.bounds)
-        print(view.window?.windowScene?.screen.bounds) // 정상적 출력
+        print(self, #function)
         
-        if let screen = view.window?.windowScene?.screen {
-            let width  = screen.bounds.size.width  * screen.scale
-            let height = screen.bounds.size.height * screen.scale
-        }
+        
+//         스크린의 크기를 얻는 방법
+//         포인트 단위의 숫자가 출력된다.
+//        print(UIScreen.main.bounds)
+//        print(view.window?.windowScene?.screen.bounds) // 정상적 출력
+//
+//        if let screen = view.window?.windowScene?.screen {
+//            let width  = screen.bounds.size.width  * screen.scale
+//            let height = screen.bounds.size.height * screen.scale
+//        }
     }
 
+    // viewWillDisappear : 루트뷰가 계층에서 제거되기 직전 호출
+    override func viewWillDisappear(_ animated: Bool) {
+        print(self, #function)
+    }
 
+    // viewDidDisappear : 루트뷰가 계층에서 제거된 다음 호출
+    override func viewDidDisappear(_ animated: Bool) {
+        print(self, #function)
+    }
+    
     // Scene안에 Window안에 ViewController
     
     /*---------------------------------*/

@@ -191,10 +191,10 @@ class LoginViewController: MyViewController{
 }
 
 let vc = LoginViewController()
+// Root View가 메모리에 로드되었습니다.
+
 // 실제로는 아래 부분이 자동으로 실행됨. 지금은 동작을 알기위해 호출
 vc.addToViewHierarchy()
-
-//Root View가 메모리에 로드되었습니다.
 //Root View를 뷰 계층에 추가하기 전입니다.
 //Root View를 뷰 계층에 추가합니다
 //Root View를 뷰 계층에 추가하고 있습니다
