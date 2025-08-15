@@ -15,8 +15,17 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4AE-xM-zRY">
+                                <rect key="frame" x="172" y="410.66666666666669" width="51" height="31"/>
+                            </switch>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemGreenColor"/>
+                        <constraints>
+                            <constraint firstItem="4AE-xM-zRY" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Sd0-sa-Vcv"/>
+                            <constraint firstItem="4AE-xM-zRY" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="lzy-Sp-DaL"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

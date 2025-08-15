@@ -13,12 +13,19 @@ class ViewController: UIViewController {
     /*-----------------------------------------------------*/
     /*              View Controller Life Cycle             */
     /*-----------------------------------------------------*/
+    // 라이플 사이클을 구현할 때는 반드시 상위 구현부터 호출해야한다.
+    // -> super.viewDidLoad() / super.viewWillAppear(animated) / ...
+    
+    
+    
     // viewDidLoad : 루틉뷰가 메모리에 저장된 다음 호출. 뷰 컨트롤러 라이프사이클 동안 한번만 호출됨
     // 초기화 코드 작성
     // 일반적인 클래스 - 생성자에서 초기화
-    // 뷰 컨트롤러 - 루트뷰가 생성된 후 초기화 작업 필요. 루트뷰는 생성자가 만들어진 다음 생성. viewDidLoad() 에서 초기화
+    // 뷰 컨트롤러 - 루트뷰가 생성된 후 초기화 작업 필요(생성자에서 초기화 불가). 루트뷰는 생성자가 만들어진 다음 생성. viewDidLoad() 에서 초기화
     override func viewDidLoad() {
         super.viewDidLoad()
+        // self.viewDidLoad() 로 바뀐다면 화면의 스위치가 표시되지 않음
+        // viewDidLoad가 반복되어 호출됨 -> 재귀호출
         
         print(self, #function)
         
@@ -50,6 +57,7 @@ class ViewController: UIViewController {
     // viewWillAppear : 루트뷰가 계층에 추가되기 직전에 호출
     // 화면이 표시되기 전 테이블뷰 데이터를 리로드하고싶다면 여기서
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         print(self, #function)
     }
     
@@ -64,6 +72,7 @@ class ViewController: UIViewController {
     // viewDidAppear : 루트뷰가 계층에 추가되고 화면이 표시된 다음 호출
     // 키보드를 표시하는 기능 구현. 어디에서 해도 똑같이 동작함
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         print(self, #function)
         
         
@@ -79,12 +88,16 @@ class ViewController: UIViewController {
     }
 
     // viewWillDisappear : 루트뷰가 계층에서 제거되기 직전 호출
+    // 계층에 변화가 있다면 호출. 계층에 변환이 없다면 호출되지 않는다.
+    // 다른 화면으로 전환될 때 호출된디.
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         print(self, #function)
     }
 
     // viewDidDisappear : 루트뷰가 계층에서 제거된 다음 호출
     override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         print(self, #function)
     }
     
@@ -197,7 +210,6 @@ class ViewController: UIViewController {
     // * 뷰 컨트롤러에서에서 라이프 사이클 이벤트를 처리하는 방식
     // -> 콜백방식 : 별도의 Delegate를 사용하지 않고. 자기자신의 메소드를 호출하는 방식
     // - 뷰 컨트롤러는 라이프 사이클 이벤트가 발생하면 UIViewController안에 있는 메소드를 호출한다. 
-    
     
     
     
